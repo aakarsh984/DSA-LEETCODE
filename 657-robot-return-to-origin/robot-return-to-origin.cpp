@@ -2,11 +2,15 @@ class Solution {
 public:
     bool judgeCircle(string moves) {
         //r=1 u=1 l=-1 d=-1
-        int r=count(moves.begin(),moves.end(),'R');
-        int l=count(moves.begin(),moves.end(),'L');
-        int u=count(moves.begin(),moves.end(),'U');
-        int d=count(moves.begin(),moves.end(),'D');
+       int x=0,y=0;
+       for(int i=0;i<moves.length();i++){
+     
+        if(moves[i]=='R')x++;
+           if(moves[i]=='L')x--;
+           if(moves[i]=='U')y++;
+           if(moves[i]=='D')y--;
+       }
 
-        return (r==l)&&(u==d);
+        return (x==0)&&(y==0);
     }
 };
