@@ -1,10 +1,20 @@
 class Solution {
 public:
+  vector<int> F = vector<int>(31, -1); 
     int fib(int n) {
-        if(n<2){
+        if(n<=1){
+            F[n]=n;
             return n;
         }
-        return fib(n-1)+fib(n-2);
-        
+        else{
+            if(F[n-2]==-1){
+                F[n-2]=fib(n-2);
+            }
+            if(F[n-1]==-1){
+                F[n-1]=fib(n-1);
+            }
+            return F[n-1]+F[n-2];
+        }
+        return 0;
     }
 };
