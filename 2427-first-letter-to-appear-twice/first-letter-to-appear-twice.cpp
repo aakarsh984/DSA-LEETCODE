@@ -1,14 +1,15 @@
 class Solution {
 public:
     char repeatedCharacter(string s) {
-        vector<int>a (26,0);
-        for(auto x:s){
-            a[x-'a']++;
-            if(a[x-'a']==2){
-                return x;
+        unordered_set<char> st;
+
+        for(char c : s){
+            if(st.count(c)){
+                return c;   // already seen → repeated
             }
+            st.insert(c);
         }
 
-       return 'A'; 
+        return 'A'; // fallback (won’t happen as per problem)
     }
 };
