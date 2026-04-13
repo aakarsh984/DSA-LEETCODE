@@ -7,8 +7,8 @@ public:
         while(i<j){
             int h=min(height[i],height[j]);
             int l=j-i;
-            int area=h*l;
-            ans=max(ans,area);
+            // int area=h*l;
+            ans=max(ans,h*l);
         if(height[i]<height[j]){
             i++;
         }
