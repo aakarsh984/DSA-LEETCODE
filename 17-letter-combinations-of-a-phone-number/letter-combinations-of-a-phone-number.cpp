@@ -10,7 +10,7 @@ unordered_map<char, string> mp = {
     {'8', "tuv"},
     {'9', "wxyz"}
 };
-void solve(string digits, int i, string res, vector<string>& ans){
+void solve(string &digits, int i, string &res, vector<string>& ans){
     if(i==digits.size()){
         ans.push_back(res);
         // res="";
