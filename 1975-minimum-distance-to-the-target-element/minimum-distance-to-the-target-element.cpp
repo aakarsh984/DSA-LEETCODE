@@ -5,8 +5,7 @@ public:
 
         for(int i=0;i<nums.size();i++){
             if(nums[i]==target){
-                int x=abs(i-start);
-                m=min(x,m);
+                m=min(m,abs(i-start));
             }
         }
         return m;
