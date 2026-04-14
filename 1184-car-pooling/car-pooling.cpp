@@ -7,7 +7,7 @@ public:
             n = (max(n, c[2]));
         }
         vector<int> v(n + 1, 0);
-        for (auto x : trips) {
+        for (auto &x : trips) {
             int c = x[0]; // passengers
             int l = x[1]; // start
             int r = x[2]; // end
