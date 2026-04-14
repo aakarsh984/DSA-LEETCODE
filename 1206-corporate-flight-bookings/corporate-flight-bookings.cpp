@@ -13,8 +13,7 @@ public:
                 v[l] -= s;
         }
 
-        int sum = 0;
-        for (int i = 1; i < v.size(); i++) {
+        for (int i = 1; i < n; i++) {
             v[i]+=v[i-1];
         }
 
