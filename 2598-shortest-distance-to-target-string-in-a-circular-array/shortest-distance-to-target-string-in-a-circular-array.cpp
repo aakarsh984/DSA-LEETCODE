@@ -4,18 +4,16 @@ public:
         if(words[startIndex]==target) return 0;
         
     int f=0;
-    int n= words.size();
-    int i=(startIndex+1)%n,j=(startIndex-1+n)%n;
+    int i=(startIndex+1)%words.size(),j=(startIndex-1+words.size())%words.size();
     while(i!=startIndex || j!=startIndex){
         f++;
         if(words[i]==target || words[j]==target)
-
              return f;
    
         
-        if(i!=startIndex) i=(i+1)%n;
+        if(i!=startIndex) i=(i+1)%words.size();
 
-        if(j !=startIndex)j=(j-1+n)%n;
+        if(j !=startIndex)j=(j-1+words.size())%words.size();
     }
 
 
