@@ -19,14 +19,14 @@ public:
        
         
 for(int i=0;i<nums.size();i++){ 
-        for (int pos : mp[nums[i]]) {
+    int val=nums[i];
+        for (int pos : mp[val]) {
             if (pos > i) {
                 int d = abs(pos - i);
                 ans = min(ans, d);
             }
-            if(ans==1) break;
+            if(ans==1) return 1;
         }
-        if(ans==1) break;
     }
         return ans==INT_MAX?-1:ans;
     }
