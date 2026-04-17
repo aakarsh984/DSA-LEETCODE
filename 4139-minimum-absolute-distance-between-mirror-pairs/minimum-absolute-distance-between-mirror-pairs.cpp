@@ -11,20 +11,20 @@ public:
     int minMirrorPairDistance(vector<int>& nums) {
         int ans = INT_MAX;
         unordered_map<int, vector<int>> mp;
-        vector<int> copy=nums;
+        
         for (int i = 0; i < nums.size(); i++) {
             mp[nums[i]].push_back(i);
-        }
-        for (int i = 0; i < nums.size(); i++) {
             nums[i] = reverseNum(nums[i]);
         }
+        // for (int i = 0; i < nums.size(); i++) {
+            
+        // }
         
 for(int i=0;i<nums.size();i++){ 
-        int val = nums[i];
-        for (int pos : mp[val]) {
-            if (pos != i && pos > i) {
+        // int val = nums[i];
+        for (int pos : mp[nums[i]]) {
+            if (pos > i) {
                 int d = abs(pos - i);
-                // d = min(d, n - d);   // remove if not circular
                 ans = min(ans, d);
             }
         }
