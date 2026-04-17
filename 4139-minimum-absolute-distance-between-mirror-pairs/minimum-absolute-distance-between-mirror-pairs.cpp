@@ -1,33 +1,33 @@
 class Solution {
 public:
-    int reverseNum(int n) {
+    int getReverse(int n) {
         int rev = 0;
-        while (n != 0) {
-            rev = rev * 10 + (n % 10);
+
+        while(n > 0) {
+            int rem = n%10;
+
+            rev = rev*10 + rem;
+
             n /= 10;
         }
+
         return rev;
     }
     int minMirrorPairDistance(vector<int>& nums) {
-        int ans = INT_MAX;
-        unordered_map<int, vector<int>> mp;
-        
-        for (int i = 0; i < nums.size(); i++) {
-            mp[nums[i]].push_back(i);
-            nums[i] = reverseNum(nums[i]);
-        }
-       
-        
-for(int i=0;i<nums.size();i++){ 
-    int val=nums[i];
-        for (int pos : mp[val]) {
-            if (pos > i) {
-                int d = abs(pos - i);
-                ans = min(ans, d);
+        int n = nums.size();
+
+        unordered_map<int, int> mp; //reversed -> idx
+
+        int result = INT_MAX;
+
+        for(int i = 0; i < n; i++) {
+            if(mp.count(nums[i])) {
+                result = min(result, i - mp[nums[i]]);
             }
-            if(ans==1) return 1;
+
+            mp[getReverse(nums[i])] = i;
         }
-    }
-        return ans==INT_MAX?-1:ans;
+
+        return result == INT_MAX ? -1 : result;
     }
 };
