@@ -16,17 +16,15 @@ public:
             mp[nums[i]].push_back(i);
             nums[i] = reverseNum(nums[i]);
         }
-        // for (int i = 0; i < nums.size(); i++) {
-            
-        // }
+       
         
 for(int i=0;i<nums.size();i++){ 
-        // int val = nums[i];
         for (int pos : mp[nums[i]]) {
             if (pos > i) {
                 int d = abs(pos - i);
                 ans = min(ans, d);
             }
+            if(ans==1) break;
         }
         if(ans==1) break;
     }
