@@ -7,9 +7,8 @@ public:
         int lr=r-1;
         int fc=0;
         int lc=c-1;
-        int t= r*c;
         vector<int>ans;
-        int i=0,j=0;
+
         while (fr <= lr && fc <= lc) {
 
             // left → right
