@@ -1,10 +1,17 @@
 class Solution {
 public:
+        int reverseNum(int n) {
+    int rev = 0;
+    while (n > 0) {
+        rev = rev * 10 + (n % 10);
+        n /= 10;
+    }
+    return rev;
+}
     int mirrorDistance(int n) {
-            string rev= to_string(n);
-            reverse(rev.begin(),rev.end());
-            int x= stoi(rev);
-            return abs(n-x);
+    int x = reverseNum(n);
+    return abs(n - x);
+
         
     }
 };
