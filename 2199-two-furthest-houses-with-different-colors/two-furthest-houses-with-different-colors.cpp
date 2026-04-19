@@ -4,11 +4,19 @@ public:
         int n = colors.size();
         int ans = 0;
 
+        // Case 1: compare with first house
+        for(int j = n - 1; j >= 0; j--) {
+            if(colors[j] != colors[0]) {
+                ans = max(ans, j - 0);
+                break;
+            }
+        }
+
+        // Case 2: compare with last house
         for(int i = 0; i < n; i++) {
-            for(int j = i + 1; j < n; j++) {
-                if(colors[i] != colors[j]) {
-                    ans = max(ans, j - i);
-                }
+            if(colors[i] != colors[n - 1]) {
+                ans = max(ans, (n - 1) - i);
+                break;
             }
         }
 
