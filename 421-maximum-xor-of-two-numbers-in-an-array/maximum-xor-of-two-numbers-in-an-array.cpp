@@ -1,27 +1,66 @@
 class Solution {
 public:
-    int findMaximumXOR(vector<int>& nums) {
-        int m=INT_MIN;
-        int x=0;
-long long a = *max_element(nums.begin(), nums.end());
+    struct trieNode {
+        trieNode* left;//0
+        trieNode* right;//1
+    };
 
-int k = 0;
-while (a > 0) {
-    k++;
-    a >>= 1;
-}
-
-long long maxXor = (1LL << k) - 1;
-        for(int i = 0; i < nums.size(); i++){
-            for(int j = 0; j < nums.size(); j++){
-                if(i==j) continue;
-                x=nums[i]^nums[j];
-                
-              m= max(m,x);
-            if(m==maxXor) break;
+    void insert(trieNode* head,int &num){
+        trieNode* craw=head;
+        for(int i=31;i>=0;i--){
+            int bit=(num>>i)&1;
+            if(bit==0){
+                if(craw->left==NULL){
+                    craw->left=new trieNode();
+                }
+                craw=craw->left;
             }
-             if(m==maxXor) break;
+            else{// bit is 1
+             if(craw->right==NULL){
+                    craw->right=new trieNode();
+                }
+                craw=craw->right;
+            }
         }
-        return m==INT_MIN?0:m;
+    }
+    int maxXor(trieNode* head,int num){
+         int maxx=0;
+         trieNode* crawl=head;
+         for(int i = 31 ; i >=0 ; i--){
+             int ith=(num>>i)&1;
+
+             if(ith==1){
+                if(crawl->left!=NULL){
+                    maxx+=pow(2,i);
+                    crawl=crawl->left;
+                }
+                else{
+                    crawl=crawl->right;
+
+                }
+             }
+             else{//ith ==0
+                    if(crawl->right!=NULL){
+                        maxx+=pow(2,i);
+                        crawl=crawl->right;
+                    }
+                    else{
+                        crawl=crawl->left;
+                    }
+
+             }
+         }
+    return maxx;
+    }
+    int findMaximumXOR(vector<int>& nums) {
+        trieNode* root = new trieNode();
+        for(int &x: nums) {
+            insert(root, x);
+        }
+        int res=0;
+        for(int &x : nums) {
+            res = max(res, maxXor(root, x));
+        }
+        return res;
     }
 };
