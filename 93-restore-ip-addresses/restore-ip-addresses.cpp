@@ -1,38 +1,48 @@
 class Solution {
 public:
-    vector<string> res;
-    int parts=0;
-    bool isvalid(string st) {
-        if (st[0] == '0')
+    int n;
+    vector<string> result;
+    
+    bool isValid(string str) {
+        if(str[0] == '0')
             return false;
-        int n = stoi(st);
-        if (n >= 0 && n <= 255)
-            return true;
-        return false;
+        
+        int val = stoi(str);
+        
+        return val <= 255;
     }
-    void solve(string s, string curr, int parts, int idx) {
-        int n =s.size();
-        if (idx == s.size() && parts == 4) {
-            curr.pop_back();
-            res.push_back(curr);
+    
+    void solve(string& s, int idx, int part, string curr) {
+        if(idx == n && part == 4) {
+            result.push_back(curr.substr(0, curr.length()-1));
             return;
         }
-        if (idx + 1 <= n) {
-            solve(s, curr + s.substr(idx, 1) + '.', parts + 1, idx + 1);
+        
+        if(idx+1 <= n)
+            solve(s, idx+1, part+1, curr + s.substr(idx, 1) + ".");
+        
+        if(idx+2 <= n && isValid(s.substr(idx, 2))) {
+            solve(s, idx+2, part+1, curr + s.substr(idx, 2) + ".");
         }
-
-        if (idx + 2 <= n && isvalid(s.substr(idx, 2))) {
-            solve(s, curr + s.substr(idx, 2) + '.', parts + 1, idx + 2);
-        }
-        if (idx + 3 <= n && isvalid(s.substr(idx,3))) {
-            solve(s, curr + s.substr(idx, 3) + '.', parts + 1, idx + 3);
+        
+        if(idx+3 <= n && isValid(s.substr(idx, 3))) {
+            solve(s, idx+3, part+1, curr + s.substr(idx, 3) + ".");
         }
     }
+    
     vector<string> restoreIpAddresses(string s) {
-        if (s.size() > 12)
-            return {};
+        result.clear();
+        
+        n = s.length();
+        
+        if(n > 12)
+          return result;
+      
+        int part = 0;
         string curr = "";
-        solve(s, curr, parts, 0);
-        return res;
+        
+        solve(s, 0, part, curr);
+        return result;
+        
     }
 };
