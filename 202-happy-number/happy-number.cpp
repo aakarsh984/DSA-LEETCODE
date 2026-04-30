@@ -1,20 +1,26 @@
 class Solution {
 public:
-    bool isHappy(int n) {
-        unordered_set<int> st;
-        
-        while (true){
-            if(st.count(n)==1) return false;
-            else st.insert(n);
-            int sum=0;
-            while(n>0){
-                int d=n%10;
-                sum+=pow(d,2);
-                n/=10;
-            }
-            if(sum==1) return true;
-            else n=sum;
+    int nextNumber(int& n) {
+        int sum = 0;
+        while(n > 0) {
+            int d = n % 10;
+            sum += d * d;
+            n /= 10;
         }
-        return true;
+        return sum;
+    }
+
+    bool isHappy(int n) {
+        unordered_set<int> seen;
+
+        while(n != 1) {
+            if(seen.count(n)) {
+                return false;  // 🔴 STOP: cycle detected
+            }
+            seen.insert(n);
+            n = nextNumber(n);
+        }
+
+        return true; // ✅ reached 1
     }
 };
