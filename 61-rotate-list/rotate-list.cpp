@@ -33,11 +33,11 @@ public:
     }
     int getLength(ListNode* head) {
         int count = 0;
-        ListNode* temp = head;
+        // ListNode* temp = head;
 
-        while (temp != NULL) {
+        while (head != NULL) {
             count++;
-            temp = temp->next;
+            head = head->next;
         }
 
         return count;
