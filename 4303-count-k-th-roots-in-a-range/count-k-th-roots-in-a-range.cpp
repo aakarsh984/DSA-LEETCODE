@@ -5,7 +5,7 @@ public:
             return r - l + 1;
 
         int count = 0;
-        for (long long x = 0;; x++) {
+        for (long long x = 0;x<r/2+1; x++) {
             long long val = 1;
             for (int i = 0; i < k; i++)
                 val *= x;
