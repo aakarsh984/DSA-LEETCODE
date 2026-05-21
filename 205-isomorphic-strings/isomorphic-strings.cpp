@@ -2,22 +2,25 @@ class Solution {
 public:
     bool isIsomorphic(string s, string t) {
 
-        unordered_map<char, char> mp;
-        unordered_set<char> used;
-        for (int i = 0; i < s.size(); i++) {
-            if (mp.count(s[i])) {
-                if (mp[s[i]] != t[i])
-                    return false;
-            }
+        unordered_map<char,char> mp1;
+        unordered_map<char,char> mp2;
 
-        else {
-            if (used.count(t[i]))
+        for(int i = 0; i < s.size(); i++) {
+
+            char a = s[i];
+            char b = t[i];
+
+            // existing mapping mismatch
+            if(mp1.count(a) && mp1[a] != b)
                 return false;
-            used.insert(t[i]);
-            mp[s[i]] = t[i];
+
+            if(mp2.count(b) && mp2[b] != a)
+                return false;
+
+            mp1[a] = b;
+            mp2[b] = a;
         }
+
+        return true;
     }
-    return true;
-}
-}
-;
+};
