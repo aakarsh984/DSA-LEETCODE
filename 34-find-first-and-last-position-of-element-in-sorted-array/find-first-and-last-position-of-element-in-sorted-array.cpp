@@ -40,12 +40,12 @@ public:
 
     vector<int> searchRange(vector<int>& nums, int target) {
        
-		int first = lowerBound(nums, target);
-		int last = upperBound(nums, target);
+		// int first = ;
+		// int last =;
 		
 		
 		
-		return {first, last};
+		return {lowerBound(nums, target),  upperBound(nums, target)};
 
         
     }
