@@ -39,14 +39,13 @@ public:
     }
 
     vector<int> searchRange(vector<int>& nums, int target) {
-        vector<int> ans;
+       
 		int first = lowerBound(nums, target);
 		int last = upperBound(nums, target);
 		
-		ans.push_back(first);
-		ans.push_back(last);
 		
-		return ans;
+		
+		return {first, last};
 
         
     }
