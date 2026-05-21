@@ -39,7 +39,7 @@ public:
              crawler=crawler->child[idx];
              count++;
         }
-        return numst2.length();
+        return count;
     }
 
 
