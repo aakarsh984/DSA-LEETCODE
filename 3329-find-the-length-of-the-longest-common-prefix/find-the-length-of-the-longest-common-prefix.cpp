@@ -1,20 +1,20 @@
-class Solution {
-public:
-    struct tn {
-        bool isend;
+  struct tn {
+        char digit;
         tn* child[10];
     };
+class Solution {
+public: 
     tn* getnode() {
         tn* newnode = new tn();
-        newnode->isend = false;
         for (int i = 0; i < 10; i++) {
             newnode->child[i] = NULL;
         }
         return newnode;
     }
-    tn* root;
-    Solution() { root = getnode(); }
-    void insert(string numst1){
+
+   
+    // Solution() { root = getnode(); }
+    void insert(string numst1, tn* root){
         tn *crawler=root;
 
         for(char c : numst1){
@@ -25,10 +25,10 @@ public:
             crawler=crawler->child[idx];
         }
 
-        crawler->isend=true;
+        // crawler->isend=true;
 
     }
-    int lengthSearch(string numst2){
+    int lengthSearch(string numst2,tn* root){
         int count =0;
         tn* crawler= root;
         for(char c: numst2){
@@ -44,16 +44,17 @@ public:
 
 
     int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
+         tn* root= getnode();
 
         for(int i = 0; i < arr1.size(); i++){
             string s= to_string(arr1[i]);
-            insert(s);
+            insert(s,root);
         }
         int ans=0;
          for(int i = 0; i < arr2.size(); i++){
             string s= to_string(arr2[i]);
-           int l=lengthSearch(s);
-           ans=max(ans,l);
+        //    int l=lengthSearch(s);
+           ans=max(ans,lengthSearch(s,root));
         }
          return ans;
 
