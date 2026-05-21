@@ -1,64 +1,65 @@
-  struct tn {
-        char digit;
-        tn* child[10];
-    };
+struct TrieNode {
+    //char digit;
+    TrieNode* children[10]; //0, 1, 2...9
+};
+
 class Solution {
-public: 
-    tn* getnode() {
-        tn* newnode = new tn();
-        for (int i = 0; i < 10; i++) {
-            newnode->child[i] = NULL;
+public:
+
+    TrieNode* getTrieNode() {
+        TrieNode* node = new TrieNode();
+        for(int i = 0; i < 10; i++) {
+            node->children[i] = nullptr;
         }
-        return newnode;
+
+        return node;
     }
 
-   
-    // Solution() { root = getnode(); }
-    void insert(string numst1, tn* root){
-        tn *crawler=root;
+    void insert(int num, TrieNode* root) {
+        TrieNode* crawl = root;
+        string numStr = to_string(num);
 
-        for(char c : numst1){
-            int idx=c-'0';
-            if(crawler->child[idx]==NULL){
-                crawler->child[idx]=getnode();
+        for(char ch : numStr) {
+            int idx = ch - '0';
+            if(!crawl->children[idx]) {
+                crawl->children[idx] = getTrieNode();
             }
-            crawler=crawler->child[idx];
-        }
 
-        // crawler->isend=true;
-
-    }
-    int lengthSearch(string numst2,tn* root){
-        int count =0;
-        tn* crawler= root;
-        for(char c: numst2){
-            int idx=c-'0';
-             if(crawler->child[idx]==NULL){
-                return count;
-             }
-             crawler=crawler->child[idx];
-             count++;
+            crawl = crawl->children[idx];
         }
-        return count;
     }
 
+    //returns the length of th elongest prefix
+    int search(int num, TrieNode* root) {
+        TrieNode* crawl = root;
+        string numStr = to_string(num);
+        int length = 0;
+
+        for(char ch : numStr) {
+            int idx = ch - '0';
+            if(crawl->children[idx]) {
+                length++;
+                crawl = crawl->children[idx];
+            } else {
+                break;
+            }
+        }
+
+        return length;
+    }
 
     int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
-         tn* root= getnode();
+        TrieNode* root = getTrieNode(); //TRIE
 
-        for(int i = 0; i < arr1.size(); i++){
-            string s= to_string(arr1[i]);
-            insert(s,root);
+        for(int num : arr1) {
+            insert(num, root);
         }
-        int ans=0;
-         for(int i = 0; i < arr2.size(); i++){
-            string s= to_string(arr2[i]);
-        //    int l=lengthSearch(s);
-           ans=max(ans,lengthSearch(s,root));
+
+        int result = 0;
+        for(int num : arr2) {
+            result = max(result, search(num, root));
         }
-         return ans;
 
-
-
+        return result;
     }
 };
