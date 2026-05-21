@@ -1,27 +1,63 @@
 class Solution {
 public:
-    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
-        unordered_set<int> arr1Prefixes;
+    struct tn {
+        bool isend;
+        tn* child[10];
+    };
+    tn* getnode() {
+        tn* newnode = new tn();
+        newnode->isend = false;
+        for (int i = 0; i < 10; i++) {
+            newnode->child[i] = NULL;
+        }
+        return newnode;
+    }
+    tn* root;
+    Solution() { root = getnode(); }
+    void insert(string numst1){
+        tn *crawler=root;
 
-        for (int i = 0; i < arr1.size(); i++) {
-            int x = arr1[i];
-            while (x > 0 && !arr1Prefixes.count(x)) {
-                arr1Prefixes.insert(x);
-                x/=10;
+        for(char c : numst1){
+            int idx=c-'0';
+            if(crawler->child[idx]==NULL){
+                crawler->child[idx]=getnode();
             }
+            crawler=crawler->child[idx];
+        }
+
+        crawler->isend=true;
+
+    }
+    int lengthSearch(string numst2){
+        int count =0;
+        tn* crawler= root;
+        for(char c: numst2){
+            int idx=c-'0';
+             if(crawler->child[idx]==NULL){
+                return count;
+             }
+             crawler=crawler->child[idx];
+             count++;
+        }
+        return numst2.length();
+    }
+
+
+    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
+
+        for(int i = 0; i < arr1.size(); i++){
+            string s= to_string(arr1[i]);
+            insert(s);
         }
         int ans=0;
-          for (int i = 0; i < arr2.size(); i++) {
-            int y=arr2[i];
-            while(y>0){
-                if(arr1Prefixes.find(y) != arr1Prefixes.end()){
-                    int l=log10(y)+1;
-                    ans=max(l,ans);
-                }
-                y/=10;
-            }
-          }
-    return ans;
+         for(int i = 0; i < arr2.size(); i++){
+            string s= to_string(arr2[i]);
+           int l=lengthSearch(s);
+           ans=max(ans,l);
+        }
+         return ans;
+
+
 
     }
 };
