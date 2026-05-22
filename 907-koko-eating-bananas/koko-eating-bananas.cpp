@@ -3,14 +3,7 @@ public:
     bool isPossible(vector<int>& piles, int h,int mid){
         int hrs=0;
         for(int i = 0; i < piles.size();i++){
-           
-            if(piles[i]<mid){
-                hrs++;
-                
-            }
-            else{
-                hrs+=ceil((double)piles[i] / mid);
-            }
+            hrs += ceil((double)piles[i] / mid);
              if(hrs>h) return false;
         }
 
