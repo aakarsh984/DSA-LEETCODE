@@ -11,7 +11,7 @@ public:
         for(int i = 0; i < n; i++){
             int j=mp[nums1[i]];
             if(j==m-1) continue;
-            for(; j < m; j++){
+            for(j=j+1; j < m; j++){
                 if(nums1[i]<nums2[j]){
                     ans[i]=nums2[j];
                     break;
