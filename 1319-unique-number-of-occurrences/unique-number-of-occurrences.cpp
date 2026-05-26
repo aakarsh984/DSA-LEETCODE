@@ -1,29 +1,25 @@
 class Solution {
 public:
     bool uniqueOccurrences(vector<int>& arr) {
-        sort(arr.begin(), arr.end());
-        int c=1;
-        unordered_set<int>s;
-        for(int i = 1; i < arr.size(); i++){
-            if(arr[i-1]==arr[i]){
-                c++;
-            }
-            else{
-                if(s.count(c)){
-                    return false;
-                }
-                else{
-                    s.insert(c);
-                   
-                }
-                 c=1;
-            }
-            
+
+        unordered_map<int,int> freq;
+
+        // count frequency
+        for(int x : arr) {
+            freq[x]++;
         }
-        if(s.count(c)){
-                    return false;
+
+        unordered_set<int> s;
+
+        // check uniqueness of frequencies
+        for(auto it : freq) {
+
+            if(s.count(it.second))
+                return false;
+
+            s.insert(it.second);
         }
-         return true;
-        
+
+        return true;
     }
 };
