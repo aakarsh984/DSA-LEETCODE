@@ -5,7 +5,7 @@ public:
     int n;
     void solve(vector<int>& candidates, int target,int idx){
         if(target==0){
-            if(!(find(ans.begin(),ans.end(),sub) != ans.end()))ans.push_back(sub);
+            ans.push_back(sub);
             return;
         }
         if(idx==n || target<0) return;
