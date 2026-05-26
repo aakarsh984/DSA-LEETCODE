@@ -9,7 +9,7 @@ public:
         for(int i = 0; i < n; i++){
             sum+=nums[i];
             int check = sum%k;
-            if(check<0)check+=k;
+            if(check<0)check+=k;//remainder negative hai to make it posotive
             if(mp.count(check)){
                 res+=mp[check];
                 mp[check]++;
