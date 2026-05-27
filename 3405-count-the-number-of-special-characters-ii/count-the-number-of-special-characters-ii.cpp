@@ -5,26 +5,29 @@ public:
         // vector<bool>small(26,false);
         vector<bool> cap(26, false);
         int count = 0;
-        for (int i = 0; i < word.length(); i++) {
+        int n=word.length();
+        for (int i = 0; i < n; i++) {
             if (islower(word[i])) {
                 mp[word[i]] = i; // last index
             } else {             // upper hai
                 if (!mp.count(word[i])) {
-                    mp[word[i]] = i;
+                    mp[word[i]] = i;//first occurence
                 }
             }
         } // for end
 
-    for(auto &p: mp){
-        char c=p.first;
-        int y=p.second;
-        if(islower(c)){
-            if(mp.count(c-32)){
-                if(y<mp[c-32]) count++;
-            }
-        }
+         for(int i = 0; i < 26; i++){
 
-    }
+            int lu=i+'a';
+            int up=i+'A';
+
+            if(mp.count(lu) && mp.count(up)){
+                if(mp[lu]<mp[up]){
+                    count++;
+                }
+            }
+             
+         }
        
         return count;
     }
