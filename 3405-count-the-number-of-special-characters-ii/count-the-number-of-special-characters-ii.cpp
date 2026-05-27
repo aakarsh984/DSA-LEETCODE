@@ -1,3 +1,10 @@
+#pragma GCC optimize("Ofast,unroll-loops")
+
+static const int _ = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return 0;
+}();
 class Solution {
 public:
     int numberOfSpecialChars(string word) {
