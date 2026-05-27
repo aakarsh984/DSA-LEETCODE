@@ -2,8 +2,6 @@ class Solution {
 public:
     int numberOfSpecialChars(string word) {
         unordered_map<char, int> mp;
-        // vector<bool>small(26,false);
-        vector<bool> cap(26, false);
         int count = 0;
         int n=word.length();
         for (int i = 0; i < n; i++) {
