@@ -1,89 +1,79 @@
 class Solution {
 public:
-    struct TrieNode {
 
-        int child[26];
-        int index;
-        int length;
-
-        TrieNode() {
-
-            memset(child, -1, sizeof(child));
-
-            index = -1;
-            length = INT_MAX;
+    struct trieNode {
+        int idx;
+        trieNode* children[26];
+        ~trieNode() {
+            for (int i = 0; i < 26; i++) {
+                delete children[i];
+            }
         }
     };
 
-    vector<TrieNode> trie;
+    trieNode* getNode(int i) {
+        trieNode* temp = new trieNode();
+        temp->idx = i;
 
-    Solution() {
-        trie.push_back(TrieNode()); // root
+        for(int i = 0; i<26; i++) {
+            temp->children[i] = NULL;
+        }
+        return temp;
     }
 
-    void insert(string &word, int idx) {
+    void insertTrie(trieNode* pCrawl, int i, vector<string>& wordsContainer) {
+        string word = wordsContainer[i];
+        int n = word.size();
 
-        int node = 0;
-        int len = word.size();
+        for(int j = n-1; j >= 0; j--) {
+            int ch_idx = word[j] - 'a';
 
-        if (len < trie[node].length ||
-           (len == trie[node].length && idx < trie[node].index)) {
-
-            trie[node].length = len;
-            trie[node].index = idx;
-        }
-
-        for (int i = len - 1; i >= 0; i--) {
-
-            int c = word[i] - 'a';
-
-            if (trie[node].child[c] == -1) {
-
-                trie[node].child[c] = trie.size();
-                trie.push_back(TrieNode());
+            if(pCrawl->children[ch_idx] == NULL) {
+                pCrawl->children[ch_idx] = getNode(i);
             }
-
-            node = trie[node].child[c];
-
-            if (len < trie[node].length ||
-               (len == trie[node].length && idx < trie[node].index)) {
-
-                trie[node].length = len;
-                trie[node].index = idx;
+            pCrawl = pCrawl->children[ch_idx];
+            
+            if(wordsContainer[pCrawl->idx].size() > n) {
+                pCrawl->idx = i;
             }
         }
     }
 
-    int search(string &word) {
+    int search(trieNode* pCrawl, string &word) {
+        int result_idx = pCrawl->idx;
+        int n = word.size();
 
-        int node = 0;
-
-        for (int i = word.size() - 1; i >= 0; i--) {
-
-            int c = word[i] - 'a';
-
-            if (trie[node].child[c] == -1) {
-                break;
+        for(int i = n-1; i >= 0; i--) {
+            int ch_idx = word[i]-'a';
+            pCrawl = pCrawl->children[ch_idx];
+            if(pCrawl == NULL) {
+                return result_idx;
             }
-
-            node = trie[node].child[c];
+            result_idx = pCrawl->idx;
         }
-
-        return trie[node].index;
+        return result_idx;
     }
 
-    vector<int> stringIndices(vector<string>& wordsContainer,vector<string>& wordsQuery) {
+    vector<int> stringIndices(vector<string>& wordsContainer, vector<string>& wordsQuery) {
+        int m = wordsContainer.size();
+        int n = wordsQuery.size();
+        vector<int> result(n);
 
-        for (int i = 0; i < wordsContainer.size(); i++) {
-            insert(wordsContainer[i], i);
+        trieNode* root = getNode(0);
+
+        for(int i = 0 ; i < m; i++) {
+            if(wordsContainer[root->idx].size() > wordsContainer[i].size()) {
+                root->idx = i;
+            }
+            insertTrie(root, i, wordsContainer);
         }
 
-        vector<int> ans;
-
-        for (auto &q : wordsQuery) {
-            ans.push_back(search(q));
+        for(int i = 0; i < n; i++) {
+            result[i] = search(root, wordsQuery[i]);
         }
 
-        return ans;
+        delete root;   // invokes destructor
+
+        return result;
     }
 };
