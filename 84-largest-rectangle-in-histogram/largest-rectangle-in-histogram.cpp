@@ -4,7 +4,7 @@ public:
 
         int n = heights.size();
 
-        vector<int> left(n), right(n);
+        vector<int> left(n);
 
         stack<int> st;
 
@@ -25,25 +25,22 @@ public:
             st.pop();
         }
 
-        // right boundary
+        int ans = 0;
+
+        // right boundary + area calculation
         for(int i = n - 1; i >= 0; i--) {
 
             while(!st.empty() && heights[st.top()] >= heights[i]) {
                 st.pop();
             }
 
-            right[i] = st.empty() ? n - 1 : st.top() - 1;
+            int right = st.empty() ? n - 1 : st.top() - 1;
 
-            st.push(i);
-        }
-
-        int ans = 0;
-
-        for(int i = 0; i < n; i++) {
-
-            int width = right[i] - left[i] + 1;
+            int width = right - left[i] + 1;
 
             ans = max(ans, heights[i] * width);
+
+            st.push(i);
         }
 
         return ans;
