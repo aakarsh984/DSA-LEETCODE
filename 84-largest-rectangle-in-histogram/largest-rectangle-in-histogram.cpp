@@ -5,6 +5,8 @@ public:
         vector<int>left(n,-1);
         vector<int>right(n,-1);
         stack<int>st;
+        stack<int>st2;
+        int ans=INT_MIN;
     //left wla min limit
         for(int i = 0; i < n; i++){
             if(st.empty()){
@@ -25,7 +27,7 @@ public:
                  st.push(i);
             }
         }
-        stack<int>st2;
+        
         for(int i = n-1; i >=0 ; i--){
             if(st2.empty()){
                 st2.push(i);
@@ -43,7 +45,7 @@ public:
             
             }
         }
-int ans=INT_MIN;
+
 for(int i = 0; i < n; i++){
     int width=right[i]-left[i]+1;
     ans=max(ans,heights[i]*width);
