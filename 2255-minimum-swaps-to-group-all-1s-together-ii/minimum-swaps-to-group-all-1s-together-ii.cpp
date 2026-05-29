@@ -19,20 +19,20 @@ public:
        
         int i = 0, j = 0;
         // window formation
-        for (j = 0; j < oneCount; j++) {
-            if (nums[j] == 0)
-                zero++;
-        }
-         int ans = zero;
+        // for (j = 0; j < oneCount; j++) {
+        //     if (nums[j] == 0)
+        //         zero++;
+        // }
+         int ans = INT_MAX;
         while (j < 2 * n) {
 
-            // while(j-i+1<oneCount){
-            //     if(nums[j]==0){
-            //         zero++;
-            //     }
-            //     j++;
+            while(j-i+1<oneCount){
+                if(nums[j]==0){
+                    zero++;
+                }
+                j++;
 
-            // }
+            }
             if(nums[j]==0){
                 zero++;
             }
