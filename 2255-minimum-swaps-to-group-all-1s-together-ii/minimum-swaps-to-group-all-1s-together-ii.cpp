@@ -11,9 +11,9 @@ public:
             return 0;
 
         // handle circular array
-        for (int i = 0; i < n; i++) {
-            nums.push_back(nums[i]);
-        }
+        // for (int i = 0; i < n; i++) {
+        //     nums.push_back(nums[i]);
+        // }
         // nuber of one = window size
         int zero = 0;
        
@@ -25,19 +25,19 @@ public:
         // }
          int ans = INT_MAX;
         while (j < 2 * n) {
-
-            while(j-i+1<oneCount){
-                if(nums[j]==0){
+   // window formation
+            while(abs(j-i)+1<oneCount){
+                if(nums[j%n]==0){
                     zero++;
                 }
                 j++;
 
             }
-            if(nums[j]==0){
+            if(nums[j%n]==0){
                 zero++;
             }
-            if (j - i + 1 > oneCount) {
-                if (nums[i] == 0) {
+            if (abs(j-i)+1 > oneCount) {
+                if (nums[i%n] == 0) {
                     zero--;
                 }
                 i++;
