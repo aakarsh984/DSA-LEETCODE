@@ -2,13 +2,9 @@ class Solution {
 public:
     int minSwaps(vector<int>& nums) {
         int n = nums.size();
-        int oneCount = 0;
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == 1)
-                oneCount++;
-        }
-        if (oneCount == 0)
-            return 0;
+        int oneCount = accumulate(nums.begin(), nums.end(), 0);
+      
+        if (oneCount <=1) return 0;
 
         // handle circular array
         // for (int i = 0; i < n; i++) {
