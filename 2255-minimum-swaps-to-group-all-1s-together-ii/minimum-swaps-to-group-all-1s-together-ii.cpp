@@ -43,6 +43,9 @@ public:
                 i++;
             }
             ans = min(ans, zero);
+            if(ans==0){
+                return 0;
+            }
             j++;
         }
         return ans;
