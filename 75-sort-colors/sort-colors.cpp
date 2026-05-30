@@ -1,22 +1,17 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        vector<int> freq(3, 0);
-
-        // Step 1: Count
-        for (int x : nums) {
-            freq[x]++;
-        }
-
-        // Step 2: Rebuild sorted array
-        int index = 0;
-
-        for (int val = 0; val < 3; val++) {
-            while (freq[val] > 0) {
-                nums[index] = val;
-                index++;
-                freq[val]--;
+        int s=0,mid=0,e=nums.size()-1;
+        while(mid<=e){
+            if(nums[mid]==0){
+                swap(nums[mid++],nums[s++]);
             }
+            else if(nums[mid]==1)mid++;
+            else{
+                swap(nums[mid],nums[e--]);
+            }
+            // mid++;
         }
+
     }
 };
