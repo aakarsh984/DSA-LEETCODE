@@ -11,12 +11,7 @@ public:
                 // j--;
                 s.pop();
             }
-            if(s.empty()){
-                ans[i]=0;
-
-            }
-            // if(temperatures[j]<temperatures[i])j--;
-            else{
+            if(!s.empty()){
                 ans[i]=s.top()-i;
             }
             
