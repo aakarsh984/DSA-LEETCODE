@@ -4,10 +4,10 @@ public:
         int n = nums.size();
         int ans = INT_MAX;
 
-        int i = 0;
+        int i = 0,j=0;
         long long sum = 0;
 
-        for(int j = 0; j < n; j++) {
+        while(j<n) {
             sum += nums[j];
 
             while(sum >= target) {
@@ -15,6 +15,7 @@ public:
                 sum -= nums[i];
                 i++;
             }
+            j++;
         }
 
         return (ans == INT_MAX) ? 0 : ans;
