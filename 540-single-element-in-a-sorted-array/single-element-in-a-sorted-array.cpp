@@ -6,8 +6,8 @@ public:
         int h=n-1;
 
         while(l<h){
-            int mid=l+(h-l)%2;
-            bool iseven=(h-mid)/2;
+            int mid=l+(h-l)/2;
+            bool iseven = (h-mid)%2==0;
             if(nums[mid]==nums[mid+1]){
                 if(iseven){
                   l=mid+2;
