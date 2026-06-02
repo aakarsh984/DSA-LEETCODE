@@ -3,7 +3,6 @@ public:
     int minOperations(vector<int>& nums, int x) {
         int n=nums.size();
         int total=accumulate(nums.begin(),nums.end(),0);
-        if(total<x)return -1;
         int rem=total-x;
         int i=0,j=0;
         int ans=-1;
