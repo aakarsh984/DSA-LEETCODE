@@ -12,10 +12,8 @@ public:
         int ans=f;
         for(int k = 0; k < n; k++){
             int last=nums[n-1-k];
-            int newf=f+sum-n*last;
-            ans=max(ans,newf);
-            f=newf;
-
+            f=f+sum-n*last;
+            ans=max(ans,f);
         }
         return ans;
         
