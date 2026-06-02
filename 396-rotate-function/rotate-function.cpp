@@ -10,9 +10,9 @@ public:
         }
 
         int ans=f;
-        for(int k = 0; k < n; k++){
-            int last=nums[n-1-k];
-            f=f+sum-n*last;
+        for(int k = 1; k < n; k++){
+            // int last=;
+            f=f+sum-n*nums[n-k];
             ans=max(ans,f);
         }
         return ans;
