@@ -1,29 +1,24 @@
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        vector<int>rs;
-        int i=0;
-        int j=0;
-        
-        while(i<m && j<n){
-            if(nums1[i]<nums2[j]){
-                rs.push_back(nums1[i]);
-                i++;
+
+        int i = m - 1;//start fromlement end
+        int j = n - 1;
+        int k = m + n - 1;
+        //start from reverse and if greater put in the kth postion which the actual last of array
+        while(i >= 0 && j >= 0){
+            if(nums1[i] > nums2[j]){
+                nums1[k] = nums1[i];
+                k--;
+                i--;
             }
             else{
-                rs.push_back(nums2[j]);
-                j++;
+                nums1[k--] = nums2[j--];
             }
         }
-        while(i<m){
-            rs.push_back(nums1[i]);
-            i++;
+    //file the reamianig elemnt
+        while(j >= 0){
+            nums1[k--] = nums2[j--];
         }
-        while(j<n){
-            rs.push_back(nums2[j++]);
-        }
-        nums1=rs;
-
-        
     }
 };
