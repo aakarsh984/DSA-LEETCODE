@@ -1,13 +1,21 @@
 class Solution {
 public:
 bool isPrime(int n) {
-    if(n < 2) return false;
+    if(n <= 1) return false;
+    int cnt = 0;  // Initialize a counter variable to count the number of factors
 
-    for(int i = 2; i * i <= n; i++) {
-        if(n % i == 0)
-            return false;
+    // Loop through numbers from 1 to the square root of n
+    for (int i = 1; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            cnt++;  // If n is divisible by i, increment the counter
+
+            // If n is not a perfect square, count its reciprocal factor
+            if (n / i != i) {
+                cnt++;
+            }
+        }
     }
-
+    if(cnt>2)return false;
     return true;
 }
 
