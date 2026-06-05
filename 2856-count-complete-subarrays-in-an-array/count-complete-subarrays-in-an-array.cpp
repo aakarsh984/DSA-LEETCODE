@@ -4,7 +4,7 @@ public:
             
             int n=nums.size();
             int ans=0;
-            set<int> st(nums.begin(), nums.end());
+            unordered_set<int> st(nums.begin(), nums.end());
             int uniq=st.size();
             if(uniq==1)return (n*(n+1))/2;
 
