@@ -1,24 +1,20 @@
 class Solution {
 public:
     vector<int> leftRightDifference(vector<int>& nums) {
+        int totalsum=accumulate(nums.begin(),nums.end(),0);
         int n=nums.size();
-        vector<int> pref(n,0);
-        vector<int>ans(n,0);
-        for(int i = 1; i < n; i++){
-            pref[i]=pref[i-1]+nums[i-1];
+        vector<int>ans(n);
+        int left=0;
+        for(int i = 0; i < n; i++){
+            int right=totalsum-left-nums[i];
+
+            int x=abs(right-left);
+            left+=nums[i];
+
+            ans[i]=x;
+
         }
-        //  for (auto i : pref) {
-        //     /* code */
-        //     cout<<i<<" ";
-        // }
-        int right=0;
-       for(int i = n-1; i >=0; i--){
-           ans[i]=abs(right-pref[i]);
-           right+=nums[i];
-       }
-       return ans;
-
-
+return ans;
         
     }
 };
