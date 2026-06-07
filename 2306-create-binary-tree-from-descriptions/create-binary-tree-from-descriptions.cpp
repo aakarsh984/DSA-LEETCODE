@@ -11,46 +11,42 @@
  */
 class Solution {
 public:
-unordered_map<int,TreeNode*>mp;
-unordered_set<int>child;
-        void solve(vector<int>des){
-            //for root
-            if(!mp.count(des[0])){
-                TreeNode* node = new TreeNode(des[0]);
-                mp[des[0]]=node;
-            }
-
-            //for child
-            if(!mp.count(des[1])){
-                TreeNode* node = new TreeNode(des[1]);
-                mp[des[1]]=node;
-                 
-            }
-            child.insert(des[1]);
-           
-            if(des.back()==1){
-                mp[des[0]]->left=mp[des[1]];
-            }
-            else{
-                 mp[des[0]]->right=mp[des[1]];
-            }
-        }
-
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
-        
-        for(int i = 0; i < descriptions.size(); i++){
-            solve(descriptions[i]);
+        unordered_map<int, TreeNode*> mp;
+        unordered_set<int> childSet; //they can never be root of the tree
+
+
+        for(vector<int>& vec : descriptions) { //O(n)
+            int parent = vec[0];
+            int child  = vec[1];
+            int isLeft = vec[2];
+
+            if(mp.find(parent) == mp.end()) {
+                mp[parent] = new TreeNode(parent);
+            }
+
+            if(mp.find(child) == mp.end()) {
+                mp[child] = new TreeNode(child);
+            }
+
+            if(isLeft == 1) { 
+                mp[parent]->left = mp[child];
+            } else {
+                mp[parent]->right = mp[child];
+            }
+
+            childSet.insert(child);
         }
-        
-        
-        for(auto &v:descriptions){
-            int parent=v[0];
-            if(!child.count(parent)){
+
+
+        //Find the root
+        for(vector<int>& vec : descriptions) { //O(n)
+            int parent = vec[0];
+            if(childSet.find(parent) == childSet.end()) { 
                 return mp[parent];
             }
         }
-         return NULL;
 
-        
+        return NULL; 
     }
 };
