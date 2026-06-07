@@ -44,10 +44,10 @@ vector<int>child;
         
         for(auto &p :mp){
             int val=p.first;
-            auto t=p.second;
+            // auto t=p.second;
             
             if(find(child.begin(),child.end(),val)== child.end()){
-                return t;
+                return p.second;
             }
         }
          return NULL;
