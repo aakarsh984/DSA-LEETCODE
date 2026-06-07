@@ -12,7 +12,7 @@
 class Solution {
 public:
 unordered_map<int,TreeNode*>mp;
-vector<int>child; 
+unordered_set<int>child;
         void solve(vector<int>des){
             //for root
             if(!mp.count(des[0])){
@@ -26,7 +26,7 @@ vector<int>child;
                 mp[des[1]]=node;
                  
             }
-            child.push_back(des[1]);
+            child.insert(des[1]);
            
             if(des.back()==1){
                 mp[des[0]]->left=mp[des[1]];
@@ -42,12 +42,11 @@ vector<int>child;
             solve(descriptions[i]);
         }
         
-        for(auto &p :mp){
-            int val=p.first;
-            // auto t=p.second;
-            
-            if(find(child.begin(),child.end(),val)== child.end()){
-                return p.second;
+        
+        for(auto &v:descriptions){
+            int parent=v[0];
+            if(!child.count(parent)){
+                return mp[parent];
             }
         }
          return NULL;
