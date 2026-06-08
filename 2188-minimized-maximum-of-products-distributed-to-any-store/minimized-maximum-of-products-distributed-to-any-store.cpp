@@ -2,15 +2,16 @@ class Solution {
 public:
     bool ispossible(int n, vector<int> q,int mid){
         int i=0;int j=0;
-        vector<int>prod(n,0);
+        // vector<int>prod(n,0);
       while(i<q.size()){
 
         if(q[i]>=mid){
-            prod[j++]=mid;
+            j++;
             q[i]-=mid;
         }
         else{
-            prod[j++]=q[i];
+            // prod[j++]=q[i];
+            j++;
             q[i]=0;
         }
         if(j==n) break;
