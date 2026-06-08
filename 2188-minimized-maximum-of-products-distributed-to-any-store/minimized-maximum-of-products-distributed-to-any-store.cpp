@@ -20,12 +20,13 @@ public:
     //     }
     int a=0;
     for(int i = 0; i < q.size(); i++){
-        if(q[i]%mid !=0){
-            a+=(q[i]/mid)+1;
-        }
-        else{
-            a+=(q[i]/mid);
-        }
+        // if(q[i]%mid !=0){
+        //     a+=(q[i]/mid)+1;
+        // }
+        // else{
+        //     a+=(q[i]/mid);
+        // }
+        a += (q[i] + mid - 1) / mid;
         if(a>n) return false;
     }
 
