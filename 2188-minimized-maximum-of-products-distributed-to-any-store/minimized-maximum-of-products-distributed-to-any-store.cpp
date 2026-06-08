@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool ispossible(int n, vector<int> q,int mid){
+    bool ispossible(int n, vector<int>&q,int mid){
         // int i=0;int j=0;
         // vector<int>prod(n,0);
     //   while(i<q.size()){
