@@ -1,29 +1,40 @@
 class Solution {
 public:
     bool ispossible(int n, vector<int> q,int mid){
-        int i=0;int j=0;
+        // int i=0;int j=0;
         // vector<int>prod(n,0);
-      while(i<q.size()){
+    //   while(i<q.size()){
 
-        if(q[i]>=mid){
-            j++;
-            q[i]-=mid;
+    //     if(q[i]>=mid){
+    //         j++;
+    //         q[i]-=mid;
+    //     }
+    //     else{
+    //         // prod[j++]=q[i];
+    //         j++;
+    //         q[i]=0;
+    //     }
+    //     if(j==n) break;
+    //     if(q[i]==0){
+    //         i++;
+    //     }
+    int a=0;
+    for(int i = 0; i < q.size(); i++){
+        if(q[i]%mid !=0){
+            a+=(q[i]/mid)+1;
         }
         else{
-            // prod[j++]=q[i];
-            j++;
-            q[i]=0;
+            a+=(q[i]/mid);
         }
-        if(j==n) break;
-        if(q[i]==0){
-            i++;
-        }
+        if(a>n) return false;
+    }
 
-      }
-        for(int i = 0; i < q.size(); i++){
-            if(q[i]!=0)return false;
-        }
-         return true;
+
+      return true;
+        // for(int i = 0; i < q.size(); i++){
+        //     if(q[i]!=0)return false;
+        // }
+        //  return true;
 
     }
     int minimizedMaximum(int n, vector<int>& q) {
