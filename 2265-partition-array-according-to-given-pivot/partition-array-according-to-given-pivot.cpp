@@ -1,34 +1,35 @@
 class Solution {
 public:
-
     vector<int> pivotArray(vector<int>& nums, int pivot) {
         int n=nums.size();
-        vector<int>less;
-        vector<int>more;
-        vector<int>eq;
+        int countless=0;
+        int counteq=0;
         for(int i = 0; i < n; i++){
             if(nums[i]<pivot){
-                less.push_back(nums[i]);
+                countless++;
             }
-            else if(nums[i]>pivot){
-                more.push_back(nums[i]);
+            else if(nums[i]==pivot){
+                counteq++;
+            }
+        }
+        int k=counteq+countless;
+        int i=0;
+        int j=countless;
+
+        vector<int>ans(n);
+        for(int x: nums){
+            if(x<pivot){
+                ans[i++]=x;
+            }
+            else if(x==pivot){
+                ans[j++]=x;
             }
             else{
-                eq.push_back(nums[i]);
+                ans[k++]=x;
             }
         }
-        vector<int>ans;
-        for(auto x:less){
-            ans.push_back(x);
-        }
-         for(auto x:eq){
-            ans.push_back(x);
-        }
- for(auto x:more){
-            ans.push_back(x);
-        }
-        return ans;
-    
+return ans;
+
         
     }
 };
