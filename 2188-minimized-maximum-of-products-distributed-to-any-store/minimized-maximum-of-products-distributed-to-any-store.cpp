@@ -1,59 +1,33 @@
 class Solution {
 public:
-    bool ispossible(int n, vector<int>&q,int mid){
-        // int i=0;int j=0;
-        // vector<int>prod(n,0);
-    //   while(i<q.size()){
+    bool canDistribute(vector<int>& quantities, int n, int maxProducts) {
+        long long storesNeeded = 0;
 
-    //     if(q[i]>=mid){
-    //         j++;
-    //         q[i]-=mid;
-    //     }
-    //     else{
-    //         // prod[j++]=q[i];
-    //         j++;
-    //         q[i]=0;
-    //     }
-    //     if(j==n) break;
-    //     if(q[i]==0){
-    //         i++;
-    //     }
-    int a=0;
-    for(int i = 0; i < q.size(); i++){
-        // if(q[i]%mid !=0){
-        //     a+=(q[i]/mid)+1;
-        // }
-        // else{
-        //     a+=(q[i]/mid);
-        // }
-        a += (q[i] + mid - 1) / mid;
-        if(a>n) return false;
+        for (int quantity : quantities) {
+            storesNeeded += (quantity + maxProducts - 1) / maxProducts;
+
+            if (storesNeeded > n) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
+    int minimizedMaximum(int n, vector<int>& quantities) {
+        int left = 1;
+        int right = *max_element(quantities.begin(), quantities.end());
 
-      return true;
-        // for(int i = 0; i < q.size(); i++){
-        //     if(q[i]!=0)return false;
-        // }
-        //  return true;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
 
-    }
-    int minimizedMaximum(int n, vector<int>& q) {
-        // int m=q.size();
-        int low = 1;
-        int high = *max_element(q.begin(), q.end());
-        int ans = INT_MIN;
-         while (low<=high){
-            int mid=low+(high-low)/2;
-            if(ispossible(n,q,mid)){
-                high=mid-1;
-               ans=mid;
+            if (canDistribute(quantities, n, mid)) {
+                right = mid;
+            } else {
+                left = mid + 1;
             }
-            else{
-                low= mid+1;
-            }
+        }
 
-         }
-         return ans;
+        return left;
     }
 };
