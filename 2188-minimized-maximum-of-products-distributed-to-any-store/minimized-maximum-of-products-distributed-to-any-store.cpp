@@ -1,12 +1,12 @@
 class Solution {
 public:
     bool canDistribute(vector<int>& quantities, int n, int maxProducts) {
-        long long storesNeeded = 0;
+        // long long storesNeeded = 0;
 
         for (int quantity : quantities) {
-            storesNeeded += (quantity + maxProducts - 1) / maxProducts;
+            n-= (quantity + maxProducts - 1) / maxProducts;
 
-            if (storesNeeded > n) {
+            if (n<0) {
                 return false;
             }
         }
