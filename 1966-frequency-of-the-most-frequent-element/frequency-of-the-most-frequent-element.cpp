@@ -36,8 +36,7 @@ public:
         }
         int res=INT_MIN;
         for(int i=0;i<n;i++){
-            int freq=bsearch(i,nums,k,pref);
-            res=max(freq,res);
+            res=max(bsearch(i,nums,k,pref),res);
         }
 
         return res;
