@@ -1,5 +1,6 @@
 class Solution {
 public:
+//bs on numbers from idx to mid and find the operation needed to convert
     int bsearch(int idx,vector<int>& nums, int k,vector<long long>&pref){
         int l=0;
         int r=idx;
