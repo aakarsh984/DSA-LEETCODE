@@ -7,7 +7,7 @@ public:
 
         int i = 0;
         int r = 0;
-        int c = 0;
+
         bool down = true;
         while (i < s.size()) {
             if (down) { // down will go vertically straight
@@ -22,7 +22,6 @@ public:
             } else { // going up diagonaly c+1 row-1
                 if (r >= 0) {
                     v[r--].push_back(s[i]);
-                    c++;
                     i++;
                 } else {
                     down = true;
