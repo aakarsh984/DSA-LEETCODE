@@ -1,10 +1,11 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
+        if (numRows == 1)
+            return s;
+        // vector<vector<char>> v(numRows);
 
-        vector<vector<char>> v(numRows);
-        if(numRows==1)return s;
-
+        vector<string> v(numRows);
         int i = 0;
         int r = 0;
 
@@ -12,8 +13,8 @@ public:
         while (i < s.size()) {
             if (down) { // down will go vertically straight
                 if (r < numRows) {
-                    v[r++].push_back(s[i]);
-                    i++;
+                    v[r++].push_back(s[i++]);
+                   
                 } else {
                     down = false;
                     r = numRows - 2;
@@ -31,11 +32,8 @@ public:
         }
         string ans;
 
-        for (int i = 0; i < numRows; i++) {
-            for (char ch : v[i]) {
-                ans += ch;
-            }
-        }
+        for (auto& row : v)
+            ans += row;
 
         return ans;
     }
