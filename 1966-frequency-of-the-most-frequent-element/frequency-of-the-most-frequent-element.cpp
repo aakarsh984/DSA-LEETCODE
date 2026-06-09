@@ -11,7 +11,7 @@ public:
             sum+=nums[j];
             long total=1LL*nums[j]*(j-i+1);
             long ops=total-sum;
-                while(ops>k){
+                if(ops>k){
                     sum-=nums[i++];
                     total=1LL*nums[j]*(j-i+1);
                     ops=total-sum;
