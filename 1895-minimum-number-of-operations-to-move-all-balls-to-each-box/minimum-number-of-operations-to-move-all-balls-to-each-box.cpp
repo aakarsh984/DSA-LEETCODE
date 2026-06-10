@@ -1,41 +1,36 @@
 class Solution {
 public:
     vector<int> minOperations(string boxes) {
-        int n=boxes.size();
-        vector<int>ans(n,0);
-        vector<int>pref(n,0);
-        vector<int>suff(n,0);
+        int n = boxes.size();
 
-        pref[0]=boxes[0]-'0';
-        int psum=pref[0];
-        for(int i = 1; i < n; i++){
-            pref[i]=pref[i-1]+(boxes[i]-'0');
-            ans[i]=psum;
-            psum+=pref[i];
+        vector<int> answer(n, 0);
 
-        }
-        suff[n-1]=boxes[n-1]-'0';
-         int ssum=suff[n-1];
-        for(int i=n-2;i>=0;i--){
-            suff[i]=suff[i+1]+(boxes[i]-'0');
-            ans[i]+=ssum;
-            ssum+=suff[i];
+        int cumValue = 0;
+        int cumValueSum = 0;
+
+        // Find moves for all left balls to index i
+        // O(n)
+        for (int i = 0; i < n; i++) {
+            answer[i] = cumValueSum;
+
+            cumValue += boxes[i] == '0' ? 0 : 1;
+
+            cumValueSum += cumValue;
         }
 
-        // for(int i = 0; i < n; i++){
-        //     //pref from 0 to i-1;
-        //     int psum=0;
-        //     int ssum=0;
-        //     for(int j = 0; j <i ; j++){
-        //         psum+=pref[j];
-        //     }
-        //     for(int j = i+1; j <n ; j++){
-        //         ssum+=suff[j];
-        //     }
-        //     ans[i]=psum+ssum;
+        cumValue = 0;
+        cumValueSum = 0;
+        // Find moves for all right balls to index i
+        // O(n)
+        for (int i = n - 1; i >= 0; i--) {
+            answer[i] += cumValueSum;
 
-        // }
-    return ans;
+            cumValue += boxes[i] == '0' ? 0 : 1;
+
+            cumValueSum += cumValue;
+        }
+
+        // O(n+n) ~ O(n)
+        return answer;
     }
-    
 };
