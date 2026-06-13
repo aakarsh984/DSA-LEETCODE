@@ -14,7 +14,7 @@ vector<int>dp=vector<int>(401,-1);
         n=nums.size();
         if (nums.size() == 1)
             return nums[0];
-        int ans = solve(nums, 0);
-        return ans;
+    
+        return solve(nums, 0);
     }
 };
